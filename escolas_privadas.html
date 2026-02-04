@@ -51,10 +51,42 @@
 
     a.download-link { color:var(--primary); font-weight:600; text-decoration:none; }
 
-    footer { background:var(--footer); color:#cbd5f5; padding:25px 15px; margin-top:50px; }
-    footer .footer-container { max-width:1200px; margin:auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
-    footer h3 { color:#fff; margin-bottom:8px; }
-    footer .copy { grid-column:1/-1; text-align:center; font-size:.8rem; opacity:.85; }
+/* RODAPÉ */
+    footer {
+      background: var(--footer);
+      color: #cbd5f5;
+      padding: 25px 15px;
+      margin-top: 40px;
+    }
+
+    footer .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      align-items: center;
+    }
+
+    footer h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    footer .copy {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
   </style>
 </head>
 
@@ -182,3 +214,4 @@ $(document).ready(function(){
 
 </body>
 </html>
+
