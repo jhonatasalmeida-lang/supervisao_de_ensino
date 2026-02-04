@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Resoluções e Portarias 2026 - URE Caieiras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --text: #1f3a5f;
+      --primary: #2c6fb2;
+      --footer: #1f3a5f;
+    }
+    body.dark {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --primary: #60a5fa;
+      --footer: #020617;
+    }
+    body { margin:0; font-family:"Segoe UI",Arial,sans-serif; background:var(--bg); color:var(--text); }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e3a8a);
+      color:#fff; padding:25px 15px;
+    }
+    .top-bar { max-width:1200px; margin:auto; display:flex; flex-wrap:wrap; justify-content:space-between; gap:15px; align-items:center; }
+    .top-actions { display:flex; gap:10px; flex-wrap:wrap; }
+    .btn { background:#fff; color:#1e3a8a; border:none; border-radius:8px; padding:10px 16px; font-weight:600; cursor:pointer; text-decoration:none; }
+    .btn-dark { background:rgba(255,255,255,.15); color:#fff; border:1px solid rgba(255,255,255,.4); }
+
+    main { max-width:1200px; margin:40px auto; padding:0 15px; }
+    .table-card { background:var(--card); border-radius:14px; padding:20px; box-shadow:0 6px 16px rgba(0,0,0,.08); }
+
+    /* TABS */
+    .tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+    .tab-btn {
+      padding:10px 16px; border:none; border-radius:8px;
+      background:#e5ecf6; cursor:pointer; font-weight:600;
+    }
+    .tab-btn.active { background:var(--primary); color:#fff; }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+
+    table.dataTable thead th { background:var(--primary); color:#fff; }
+
+    a.download-link { color:var(--primary); font-weight:600; text-decoration:none; }
+
+    footer { background:var(--footer); color:#cbd5f5; padding:25px 15px; margin-top:50px; }
+    footer .footer-container { max-width:1200px; margin:auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
+    footer h3 { color:#fff; margin-bottom:8px; }
+    footer .copy { grid-column:1/-1; text-align:center; font-size:.8rem; opacity:.85; }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="top-bar">
+    <div>
+      <h1>Equipe de Supervisão de Ensino - Escolas Privadas</h1>
+      <p>Unidade Regional de Ensino de Caieiras</p>
+    </div>
+    <div class="top-actions">
+      <a class="btn" href="index.html">🏠 Home</a>
+      <a class="btn" href="https://decaieiras.educacao.sp.gov.br">⬅ Voltar para o site principal</a>
+      <button class="btn btn-dark" onclick="toggleDarkMode()">🌙 Modo noturno</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="table-card">
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="openTab(event,'tab1')">Resoluções</button>
+      <button class="tab-btn" onclick="openTab(event,'tab2')">Orientações</button>
+      <button class="tab-btn" onclick="openTab(event,'tab3')">Modelo Plano Escolar</button>
+    </div>
+
+    <!-- TAB 1 -->
+    <div id="tab1" class="tab-content active">
+      <table id="legislacoesTable" class="display">
+        <thead>
+          <tr><th>Data</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>20/01/2026</td><td><strong>BOLETIM SUART</strong> — Normas e orientações para EAD.</td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQBz3s5BgmMNSq2H0cqHMhTPAZbN7y6GrxzX4F7JcHWjF5w?e=XcNDX9" target="_blank">Download</a></td></tr>
+          <tr><td>31/10/2025</td><td><strong>Deliberação CEE 231/2025</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EbpzpXiXRz5Ai60fTKXN3d4BvS2WqhcJ_e_PhkZp5GmHcw?e=OIatBO" target="_blank">Download</a></td></tr>
+          <tr><td>31/10/2025</td><td><strong>Deliberação CEE 235/2025</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EUqPu6uPP1tEgSf8zkqae4ABX-01hVqqzamPeTQtZH5IUg?e=XlI3nl" target="_blank">Download</a></td></tr>
+          <tr><td>17/10/2025</td><td><strong>Boletim Subsecretarias Nº 41</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EY_XZd-ZzORLkL9mGgUbx8sBu6tUjbU0NaI-RVDaP3lOwA?e=901EFY" target="_blank">Download</a></td></tr>
+          <tr><td>01/10/2025</td><td><strong>Resolução SEDUC Nº 130/2021</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EQvG_hDkCrtKo6CVVjo1QlsBHQ0CwLIzbC-1wv5WAGWdrQ?e=fg1rql" target="_blank">Download</a></td></tr>
+          <tr><td>04/10/2022</td><td><strong>BNCC Computação</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQDNdeX2FF9rRqWTJht2F_dyAWQgH-fQhkbQd7n6K6SeBxQ?e=dVEjcW" target="_blank">Download</a></td></tr>
+          <tr><td>04/10/2022</td><td><strong>Resolução nº 1/2022</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQDl5cwOICYyQKzmopKSIRRVAadYP7ruk9J2JcvsIn6Tkdw?e=UB8QxL" target="_blank">Download</a></td></tr>
+          <tr><td>11/02/2016</td><td><strong>Deliberação CEE 138/2016</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EQWxF8aRLIZNoq89cKqpzrABoLtOvtGDnmliXvlblT5f5w?e=XqwQh0" target="_blank">Download</a></td></tr>
+          <tr><td>06/10/2016</td><td><strong>Deliberação CEE 148/2016</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EcfyopaCHbxMgfbvub_Sae8BoJAcDC64gZtJx9zfjxjDSw?e=w5bkYU" target="_blank">Download</a></td></tr>
+          <tr><td>05/05/2016</td><td><strong>Deliberação CEE 140/2016</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EfjF0kqYkcdDu830LltXiccBGS6wWS3UM2b6yv1EScKBPQ?e=P2CXdb" target="_blank">Download</a></td></tr>
+          <tr><td>06/07/2017</td><td><strong>Deliberação CEE 155/2017</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EfA8c7wF_qROs1xvDk-UniEBJKqi5QhCQ26hFM2pF2tP_g?e=PC96zE" target="_blank">Download</a></td></tr>
+          <tr><td>30/01/2019</td><td><strong>Deliberação CEE 166/2019</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ERrFNnn3i3VNm5jI6yhpsH4BTzn_uc1qSUwtc512ZYh3ZQ?e=nbEweQ" target="_blank">Download</a></td></tr>
+          <tr><td>08/09/1994</td><td><strong>Resolução SS-493/1994</strong></td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EWguiZOklspEhNiAvv3LdYIB3tB_aiQXC_4LwthrQwfb2w?e=YdhMj1" target="_blank">Download</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB 2 -->
+    <div id="tab2" class="tab-content">
+      <table id="orientacoesTable" class="display">
+        <thead><tr><th>Documento</th><th>Download</th></tr></thead>
+        <tbody>
+          <tr><td>Prorrogação do prazo para aprovação dos Regimentos Escolares</td><td><a class="download-link" href="https://midiasstoragesec.blob.core.windows.net/001/2025/10/prorrogao-de-prazo-31102025-ure-caieiras.pdf" target="_blank">Download</a></td></tr>
+          <tr><td>Data-base para matrícula na Educação Infantil e Ensino Fundamental</td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/Efqnj9xVFEJEr5evl1EPesYBMC-fOSDJpYJj9l6JQ2kFPA?e=Kj22BH" target="_blank">Download</a></td></tr>
+          <tr><td>Matrizes Curriculares, Calendário, Plano de Convivência e Orientações Gerais</td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EV3ZMVV6wylGiCt5tGy_DbIBiHnrAXYvQm3k44blRky0Ww?e=KeWfF4" target="_blank">Download</a></td></tr>
+          <tr><td>Autorização de Escolas Particulares — Prédio Escolar</td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ET7Nbfi5Q11DqGzeSB1ZYScBQIVhaxSXACoSNWyK-lQGeQ?e=pigEc7" target="_blank">Download</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB 3 -->
+    <div id="tab3" class="tab-content">
+      <table id="modeloPlanoTable" class="display">
+        <thead><tr><th>Documento</th><th>Download</th></tr></thead>
+        <tbody>
+          <tr><td>Modelo Plano Escolar DER-Caieiras</td><td><a class="download-link" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EamYz5a2evpBhSXD7B5jqFYBWlvfvdN5qTU4T1rPrSktJA?e=LCPwm1" target="_blank">Download</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Unidade Regional de Ensino de Caieiras</h3>
+        <p>Equipe de Supervisão de Ensino</p>
+        <p>Secretaria da Educação do Estado de São Paulo</p>
+      </div>
+
+      <div>
+        <h3>Atalhos</h3>
+        <p><a href="https://decaieiras.educacao.sp.gov.br">Site principal</a></p>
+        <p><a href="#">Topo da página</a></p>
+      </div>
+
+      <div>
+        <h3>Visual</h3>
+        <p>Use o botão de modo noturno para melhor conforto visual.</p>
+      </div>
+
+      <div class="copy">
+        © 2026 - Unidade Regional de Ensino - Região de Caieiras. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<script>
+function toggleDarkMode(){ document.body.classList.toggle('dark'); }
+
+function openTab(evt, tabId){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+
+$(document).ready(function(){
+  $('#legislacoesTable').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#orientacoesTable').DataTable({ paging:false, searching:true, info:false, language:{search:"Buscar:"} });
+  $('#modeloPlanoTable').DataTable({ paging:false, searching:false, info:false });
+});
+</script>
+
+</body>
+</html>
