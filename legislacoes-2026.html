@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Resoluções e Portarias 2026 - URE Caieiras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --text: #1f3a5f;
+      --primary: #2c6fb2;
+      --footer: #1f3a5f;
+    }
+
+    body.dark {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --primary: #60a5fa;
+      --footer: #020617;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e3a8a);
+      color: #fff;
+      padding: 25px 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .top-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    header p {
+      margin: 5px 0 0 0;
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    .btn {
+      background: #ffffff;
+      color: #1e3a8a;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    .btn-dark {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    /* CONTEÚDO */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 15px;
+    }
+
+    .table-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    table.dataTable {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      color: var(--text);
+    }
+
+    table.dataTable thead th {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px;
+    }
+
+    table.dataTable tbody td {
+      padding: 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    body.dark table.dataTable tbody td {
+      border-bottom: 1px solid #1f2933;
+    }
+
+    table.dataTable tbody tr:hover {
+      background: rgba(44,111,178,0.08);
+    }
+
+    a.download-link {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a.download-link:hover {
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--footer);
+      color: #cbd5f5;
+      padding: 25px 15px;
+      margin-top: 50px;
+    }
+
+    footer .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      align-items: center;
+    }
+
+    footer h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    footer p, footer a {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #cbd5f5;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    footer .copy {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="top-bar">
+      <div>
+        <h1>Equipe de Supervisão de Ensino - Resoluções e Portarias 2026</h1>
+        <p>Unidade Regional de Ensino de Caieiras</p>
+      </div>
+
+      <div class="top-actions">
+        <a class="btn" href="index.html">🏠 Home</a>
+        <a class="btn" href="https://decaieiras.educacao.sp.gov.br" target="_self">
+          ⬅ Voltar para o site principal
+        </a>
+        <button class="btn btn-dark" onclick="toggleDarkMode()">
+          🌙 Modo noturno
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main>
+    <div class="table-card">
+      <table id="legislacoesTable" class="display">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Assunto</th>
+            <th>Arquivo</th>
+          </tr>
+        </thead>
+
+        <!-- COLE AQUI SEU TBODY (que já está ok) -->
+        <tbody>
+          <!-- 👇 COLE AQUI SUAS LINHAS <tr> DA TABELA -->
+
+<tr>
+  <td>30/01/2026</td>
+  <td>PORTARIA DA SUBSECRETÁRIA, 30 DE JANEIRO DE 2026 — Convoca servidores para o I Seminário Educação em Foco: Desafios e Perspectivas da Alimentação Escolar.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQCGecverUOGRZPGL2ldjz5KAeNVvY-B4UwRsnsjTjgln9E?e=ajyrLI" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>30/01/2026</td>
+  <td>PORTARIA DO SUBSECRETÁRIO, DE 30 DE JANEIRO DE 2026 — Estabelece atribuições do Professor Articulador por Área de Conhecimento (PAAC).</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQCHlWdgfMEUQ7zmaQXQWj36Ad1lKKaXvmj7sZ11OugmvZM?e=GE2OHp" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>28/01/2026</td>
+  <td>Portaria da Diretoria de Pessoas nº 07/2026 — Diretrizes e cronograma do módulo administrativo para URE.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQAJ1gKUFg62R4avOFAqkxbgAUZ3EUGn8z_dvfuBe6sxs10?e=G1GdZ8" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>23/01/2026</td>
+  <td>PORTARIA DA DIRETORIA DE PESSOAS — Edital de Abertura do Processo de Progressão 2020 - QSE.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQBmgb1r7g6HRpKTIdLdHQ71AandP8fwQpioG3EgBF8Cx7U?e=FkYaHg" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>23/01/2026</td>
+  <td>Portaria SUPED — Normas para implementação do Programa Professor Tutor Anos Iniciais.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQAzQn-AZ4YXSJqY1TMZf9YtATUv4hDPMzkAn15P-0NXe2U?e=kNsa6v" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>23/01/2026</td>
+  <td>Portaria SUPED — Diretrizes operacionais e carga horária do Programa Professor Tutor Anos Iniciais.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQD6LY0enXUOTYZixA5WJdSsAXU4pqxd7OQAYpu1AJtk58c?e=CY2wXS" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>23/01/2026</td>
+  <td>RESOLUÇÃO SEDUC Nº 10/2026 — Altera dispositivos sobre atribuição de classes e aulas.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQAfYYqkLBuxQqBReWX-r7YQAeoWwoaEF_AX38RhpWZHsug?e=eI3bXx" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>23/01/2026</td>
+  <td>RESOLUÇÃO SEDUC Nº 9/2026 — Altera módulo e movimentação do QAE e QSE.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQC7jRaIzFFDTLYhkh52QjNaAW7k6_pzH2Vl8tZU01qME6o?e=B2KWeU" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>23/01/2026</td>
+  <td>RESOLUÇÃO SEDUC Nº 8/2026 — Contratação de docentes por tempo determinado.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQDbY_iDrehhTLQsMMvKC0oyAco0jZiiQ1c7SsLGNeAPKS4?e=cjJLyh" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>21/01/2026</td>
+  <td>RESOLUÇÃO SEDUC Nº 6/2026 — Descentralização de competências em matéria correcional.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQABDPYdYit1S4j9S1MGeab8AUkWApr1bGpR5y3gaWuKmjA?e=5uQCXy" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>20/01/2026</td>
+  <td>RESOLUÇÃO SEDUC Nº 5/2026 — Acesso a processos administrativos correcionais.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQC14NLRdV8MQ5-6s9Z1J-SyAX0xMZj-kw5vn2lfd_h9lk8?e=KAz0cQ" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>20/01/2026</td>
+  <td>RESOLUÇÃO SEDUC Nº 4/2026 — Institui o Prontuário Digital do Estudante (PDE).</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQDlgsc_AOnkT4Qw-1HmIMQ5AUTUvdKiYLW2knKF2gr7sfE?e=GF0GTz" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>13/01/2026</td>
+  <td>RESOLUÇÃO SEDUC Nº 3/2026 — Processo inicial de atribuição de classes e aulas.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQBlPcV-GVFwSoiWhRIgMKZCAeh3weCARY9U9otI4nykMe8?e=kYN4MY" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>09/01/2026</td>
+  <td>RESOLUÇÃO SEDUC Nº 2/2026 — Diretrizes gerais apresentadas pela SUPED e SUCOR.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQAVEWzFaQQZT7gbXDPBYroUAROykh7t-D1jsWn_qgZ--dU?e=lhrZQF" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>06/01/2026</td>
+  <td>RESOLUÇÃO SEDUC Nº 1/2026 — Funções de Professor Especialista em Currículo (PEC) e CEC.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQBF1xt3yxvcSpgytJoAhUgpAS1a6Vx45b5vooPyQKbjAmo?e=QhBUdI" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>05/01/2026</td>
+  <td>PORTARIA DIPES Nº 01/2026 — Procedimentos para movimentação no Programa Ensino Integral – PEI.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQCJ3r5ErBQ7Sbqrs8NLJMCjASpcHiVMafDexCiCt2pGhPM?e=ssLujb" target="_blank">Download</a></td>
+</tr>
+
+</tbody>
+
+      </table>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Unidade Regional de Ensino de Caieiras</h3>
+        <p>Equipe de Supervisão de Ensino</p>
+        <p>Secretaria da Educação do Estado de São Paulo</p>
+      </div>
+
+      <div>
+        <h3>Atalhos</h3>
+        <p><a href="https://decaieiras.educacao.sp.gov.br">Site principal</a></p>
+        <p><a href="#">Topo da página</a></p>
+      </div>
+
+      <div>
+        <h3>Visual</h3>
+        <p>Use o botão de modo noturno para melhor conforto visual.</p>
+      </div>
+
+      <div class="copy">
+        © 2026 - Unidade Regional de Ensino - Região de Caieiras. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<script>
+  // Plugin simples para ordenar datas no formato DD/MM/YYYY
+  jQuery.extend(jQuery.fn.dataTable.ext.type.order, {
+    "date-br-pre": function (d) {
+      if (!d) return 0;
+      var parts = d.split('/');
+      return new Date(parts[2], parts[1] - 1, parts[0]).getTime();
+    },
+    "date-br-asc": function (a, b) {
+      return a - b;
+    },
+    "date-br-desc": function (a, b) {
+      return b - a;
+    }
+  });
+
+  $(document).ready(function () {
+    $('#legislacoesTable').DataTable({
+      pageLength: 10,
+      order: [[0, 'desc']], // Data mais recente primeiro
+      columnDefs: [
+        { type: 'date-br', targets: 0 } // Coluna Data
+      ],
+      language: {
+        search: "Buscar:",
+        lengthMenu: "Mostrar _MENU_ registros",
+        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        paginate: {
+          next: "Próximo",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark');
+  }
+</script>
+
+
+</body>
+</html>
