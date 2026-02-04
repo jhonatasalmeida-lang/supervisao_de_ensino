@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Resoluções e Portarias 2025 - URE Caieiras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --text: #1f3a5f;
+      --primary: #2c6fb2;
+      --footer: #1f3a5f;
+    }
+
+    body.dark {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --primary: #60a5fa;
+      --footer: #020617;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e3a8a);
+      color: #fff;
+      padding: 25px 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .top-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    header p {
+      margin: 5px 0 0 0;
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    .btn {
+      background: #ffffff;
+      color: #1e3a8a;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    .btn-dark {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    /* CONTEÚDO */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 15px;
+    }
+
+    .table-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    table.dataTable {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      color: var(--text);
+    }
+
+    table.dataTable thead th {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px;
+    }
+
+    table.dataTable tbody td {
+      padding: 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    body.dark table.dataTable tbody td {
+      border-bottom: 1px solid #1f2933;
+    }
+
+    table.dataTable tbody tr:hover {
+      background: rgba(44,111,178,0.08);
+    }
+
+    a.download-link {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a.download-link:hover {
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--footer);
+      color: #cbd5f5;
+      padding: 25px 15px;
+      margin-top: 50px;
+    }
+
+    footer .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      align-items: center;
+    }
+
+    footer h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    footer p, footer a {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #cbd5f5;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    footer .copy {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="top-bar">
+      <div>
+        <h1>Equipe de Supervisão de Ensino - Resoluções e Portarias 2026</h1>
+        <p>Unidade Regional de Ensino de Caieiras</p>
+      </div>
+
+      <div class="top-actions">
+        <a class="btn" href="index.html">🏠 Home</a>
+        <a class="btn" href="https://decaieiras.educacao.sp.gov.br" target="_self">
+          ⬅ Voltar para o site principal
+        </a>
+        <button class="btn btn-dark" onclick="toggleDarkMode()">
+          🌙 Modo noturno
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main>
+    <div class="table-card">
+      <table id="legislacoesTable" class="display">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Assunto</th>
+            <th>Arquivo</th>
+          </tr>
+        </thead>
+
+        <!-- COLE AQUI SEU TBODY (que já está ok) -->
+        <tbody>
+          <!-- 👇 COLE AQUI SUAS LINHAS <tr> DA TABELA -->
+<tr>
+  <td>29/12/2025</td>
+  <td>DECRETO Nº 70.310, DE 29 DE DEZEMBRO DE 2025 - Dispõe sobre o pagamento do décimo terceiro salário dos servidores públicos estaduais, nos termos da Lei Complementar nº 644, de 26 de dezembro de 1989, e da Lei Complementar nº 817, de 12 de novembro de 1996, e dá providências correlatas</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQDuSjvCRf8eQ45UtegqnmldAW5oqiG5jfszNsa0UzG18Hk?e=veOnlE" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>26/12/2025</td>
+  <td>RETIFICAÇÃO, DE 26 DE DEZEMBRO DE 2025 - Retificação da Resolução SEDUC nº 125, de 22 de setembro de 2025, sobre o calendário escolar para o ano letivo de 2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQD7No6LG33DR4YtjPKUKYkiASh3LSHOgagHjjjzSDmsnLs?e=uxFz9T" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>23/12/2025</td>
+  <td>Lei Complementar nº 1.437, de 23 de dezembro de 2025 - Altera o Estatuto dos Funcionários Públicos Civis do Estado e dá providências correlatas</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQC8FCrapBLlS6ZuNFOtdJYWAc7t6Fsrq2bdZuPqUS2-L7o?e=m2Zi9g" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>23/12/2025</td>
+  <td>DECRETO Nº 70.273, DE 23 DE DEZEMBRO DE 2025 - Dispõe sobre o expediente dos servidores nas repartições públicas estaduais no ano de 2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQA4xhspw7NFRLOG82CTicj6AaN8UVWFYGDS9KlsdHfjqMQ?e=53rFks" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>22/12/2025</td>
+  <td>RESOLUÇÃO SEDUC Nº 170, DE 22 DE DEZEMBRO DE 2025 - Dispõe sobre ações de formação continuada para servidores da SEDUC-SP</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQBGaXJlkxZVR5khHTIdT7A8Af9S5_xNAhC4Es2VGuDTEQ8?e=FJ9yt5" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>22/12/2025</td>
+  <td>RESOLUÇÃO SEDUC Nº 169, DE 22 DE DEZEMBRO DE 2025 - Altera a Resolução nº 160 sobre organização curricular do Ensino Médio Técnico</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQBWE0ROvCmRRKgqQBPQ3g39AeiHRk7zODe9WJtzIINWmM8?e=IwT96Z" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>22/12/2025</td>
+  <td>RESOLUÇÃO SEDUC Nº 168, DE 22 DE DEZEMBRO DE 2025 - Dispõe sobre inscrição de professores indígenas para Educação Escolar Indígena em 2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQBAGiFyjRAbQoCaExL_diL2AbcO3PE1KNsHb1RCrvdhVc0?e=Z0db54" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>12/12/2025</td>
+  <td>RESOLUÇÃO DO SECRETÁRIO, DE 12 DE DEZEMBRO DE 2025 - Homologa Deliberação CEE nº 238/2025 sobre credenciamento e EAD</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQDZ-IrLuVHlQIs9k-vtWyxAASwuOl-oCPbXmmofcNUIM-E?e=N9jvTQ" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>11/12/2025</td>
+  <td>RESOLUÇÃO SEDUC Nº 165, DE 11 DE DEZEMBRO DE 2025 - Dispõe sobre AEE e Ensino Colaborativo</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQCLP9efCrPrSpqMS1h_ngJwAQ4VpGA2AE9z3RUgJZts1PM?e=QV2ZRb" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>09/12/2025</td>
+  <td>RESOLUÇÃO SEDUC Nº 163, DE 9 DE DEZEMBRO DE 2025 - Gestão de pessoas no Programa Ensino Integral – PEI</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQBCK3zww_6ETJojeCtxyCzUAcqw-xUPqumt3zL9U7vQy90?e=VhuGnm" target="_blank">Download</a></td>
+</tr>
+
+
+</tbody>
+
+      </table>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Unidade Regional de Ensino de Caieiras</h3>
+        <p>Equipe de Supervisão de Ensino</p>
+        <p>Secretaria da Educação do Estado de São Paulo</p>
+      </div>
+
+      <div>
+        <h3>Atalhos</h3>
+        <p><a href="https://decaieiras.educacao.sp.gov.br">Site principal</a></p>
+        <p><a href="#">Topo da página</a></p>
+      </div>
+
+      <div>
+        <h3>Visual</h3>
+        <p>Use o botão de modo noturno para melhor conforto visual.</p>
+      </div>
+
+      <div class="copy">
+        © 2026 - Unidade Regional de Ensino - Região de Caieiras. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<script>
+  // Plugin simples para ordenar datas no formato DD/MM/YYYY
+  jQuery.extend(jQuery.fn.dataTable.ext.type.order, {
+    "date-br-pre": function (d) {
+      if (!d) return 0;
+      var parts = d.split('/');
+      return new Date(parts[2], parts[1] - 1, parts[0]).getTime();
+    },
+    "date-br-asc": function (a, b) {
+      return a - b;
+    },
+    "date-br-desc": function (a, b) {
+      return b - a;
+    }
+  });
+
+  $(document).ready(function () {
+    $('#legislacoesTable').DataTable({
+      pageLength: 10,
+      order: [[0, 'desc']], // Data mais recente primeiro
+      columnDefs: [
+        { type: 'date-br', targets: 0 } // Coluna Data
+      ],
+      language: {
+        search: "Buscar:",
+        lengthMenu: "Mostrar _MENU_ registros",
+        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        paginate: {
+          next: "Próximo",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark');
+  }
+</script>
+
+
+</body>
+</html>
+
