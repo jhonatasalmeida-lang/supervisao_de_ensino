@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Educação Profissional - URE Caieiras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --text: #1f3a5f;
+      --primary: #2c6fb2;
+      --footer: #1f3a5f;
+    }
+
+    body.dark {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --primary: #60a5fa;
+      --footer: #020617;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e3a8a);
+      color: #fff;
+      padding: 25px 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .top-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    header p {
+      margin: 5px 0 0 0;
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    .btn {
+      background: #ffffff;
+      color: #1e3a8a;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    .btn-dark {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    /* CONTEÚDO */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 15px;
+    }
+
+    .table-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    table.dataTable {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      color: var(--text);
+    }
+
+    table.dataTable thead th {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px;
+    }
+
+    table.dataTable tbody td {
+      padding: 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    body.dark table.dataTable tbody td {
+      border-bottom: 1px solid #1f2933;
+    }
+
+    table.dataTable tbody tr:hover {
+      background: rgba(44,111,178,0.08);
+    }
+
+    a.download-link {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a.download-link:hover {
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--footer);
+      color: #cbd5f5;
+      padding: 25px 15px;
+      margin-top: 50px;
+    }
+
+    footer .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      align-items: center;
+    }
+
+    footer h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    footer p, footer a {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #cbd5f5;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    footer .copy {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="top-bar">
+      <div>
+        <h1>Equipe de Supervisão de Ensino - Educação Profissional</h1>
+        <p>Unidade Regional de Ensino de Caieiras</p>
+      </div>
+
+      <div class="top-actions">
+        <a class="btn" href="index.html">🏠 Home</a>
+        <a class="btn" href="https://decaieiras.educacao.sp.gov.br" target="_self">
+          ⬅ Voltar para o site principal
+        </a>
+        <button class="btn btn-dark" onclick="toggleDarkMode()">
+          🌙 Modo noturno
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main>
+    <div class="table-card">
+      <table id="legislacoesTable" class="display">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Assunto</th>
+            <th>Arquivo</th>
+          </tr>
+        </thead>
+
+        <!-- COLE AQUI SEU TBODY (que já está ok) -->
+        <tbody>
+          <!-- 👇 COLE AQUI SUAS LINHAS <tr> DA TABELA -->
+<tr>
+  <td>15/01/2025</td>
+  <td>PORTARIA DIPES Nº 05, DE 15 DE JANEIRO DE 2026 — Dispõe sobre os procedimentos e sobre o cronograma para atendimento dos integrantes do Quadro do Magistério - QM para atribuição de classes e aulas para o ano letivo de 2026, no âmbito do Processo Anual de Atribuição de Classes e Aulas de 2026, em conformidade com a Resolução SEDUC nº 3, de 13 de janeiro de 2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQDEORP__bEtTrHOMLwRFEg-AdLrOkkQ8hJ3xgrzszCDo70?e=YPIo1P" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>13/01/2026</td>
+  <td>RESOLUÇÃO SEDUC Nº 3, DE 13 DE JANEIRO DE 2026 — Dispõe sobre o processo inicial de atribuição de classes e aulas aos docentes efetivos, não efetivos, contratados e candidatos à contratação do Quadro de Magistério - QM da rede estadual de São Paulo e dá providências correlatas</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQBE0GHBz784T4eyf2GVQAiAAS4KAdY6K3SxnT32Y5BSucw?e=Z5jdn9" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>19/01/2025</td>
+  <td>Lista de Aprovados no Processo Seletivo PSS da Fundação Getúlio Vargas - FGV, para atuação nos componentes curriculares do IFTP em nível de URE - Eixo I.</td>
+  <td><a href="https://seesp-my.sharepoint.com/:x:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQBS7CuaHBNGSJ6iplsyXUOEAbci8Nmf_6eeQCumOcXBJ50?e=8fIPhu" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>18/12/2025</td>
+  <td>RESOLUÇÃO SEDUC Nº 167, DE 18 DE DEZEMBRO DE 2025 — Dispõe sobre a atribuição de aulas dos componentes curriculares do Itinerário de Formação Técnica e Profissional - IFTP no âmbito da rede estadual de ensino e dá providências correlatas</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQB6KIskEHLRS4O9wEqcpQx0AQkdCNZqMma6jS-Ie54sgNU?e=w9Y8w9" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>16/07/2025</td>
+  <td>EDITAL DE ABERTURA DE INSCRIÇÕES - 16/07/2025 — Processo Seletivo Simplificado para Contratação Temporária de Docentes para a Educação Profissional Técnica de Nível Médio</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/luzia_oliveira2_educacao_sp_gov_br/Edz7JRiCX-dFvhWToQffZ4EBOxVBUZXkgse2319R6i_JUA" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>18/08/2023</td>
+  <td>RESOLUÇÃO SEDUC Nº 35, DE 18/08/2023 — Institui o Programa “Educação Profissional Paulista”, estabelece diretrizes para a organização e funcionamento nas Escolas Estaduais de Ensino Médio da rede, e dá providências correlatas</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EWG9RZO0H-JMgTuSNS3zCn4BJ-UTEVqSMZl_Uw4_GTWd_w?e=gVBfx0" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>17/11/2023</td>
+  <td>RESOLUÇÃO SEDUC Nº 51, DE 17/11/2023 — Dispõe sobre a organização curricular de cursos do Ensino Médio articulados à Educação Profissional e Técnica de Nível Médio a serem oferecidos em unidades escolares da rede estadual de ensino e dá providências correlatas</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EfNCky3xrolJiFPFQMLiTfUB3WOVIuq99vkBJyA0_V7gvg?e=ahNnU1" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>12/12/2019</td>
+  <td>DELIBERAÇÃO CEE Nº 173/2019 — Reconhecimento de Notório Saber de profissionais para ministrar conteúdos de áreas afins à sua formação ou experiência profissional, exclusivamente para atender ao disposto no inciso V do caput do artigo 36 da LDB com redação alterada pela Lei nº 13.415/2017</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EaDGxPQjv91LpoItlsakXjwBCBL3zJ58DmW09QJiabEouA?e=6ZXetf" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>14/04/2022</td>
+  <td>DELIBERAÇÃO CEE Nº 207/2022 — Fixa Diretrizes Curriculares para a Educação Profissional e Tecnológica no Sistema de Ensino do Estado de São Paulo</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EbPmIOLOnnVMgowMzmxxsJkBPomNhmij6ds_DH73wqR1qA?e=xZtzcu" target="_blank">Download</a></td>
+</tr>
+
+<tr>
+  <td>08/02/2024</td>
+  <td>RESOLUÇÃO SEDUC Nº 11, DE 08/02/2024 — Dispõe sobre o Projeto de Apoio ao Estudante do Ensino Técnico (PAEET) e dá providências correlatas</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ER92CY19b7dNmHmZplc-QsABMHuKCyqvD-lEWJ1Oh8a0KQ?e=QfgVVr" target="_blank">Download</a></td>
+</tr>
+
+
+</tbody>
+
+      </table>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Unidade Regional de Ensino de Caieiras</h3>
+        <p>Equipe de Supervisão de Ensino</p>
+        <p>Secretaria da Educação do Estado de São Paulo</p>
+      </div>
+
+      <div>
+        <h3>Atalhos</h3>
+        <p><a href="https://decaieiras.educacao.sp.gov.br">Site principal</a></p>
+        <p><a href="#">Topo da página</a></p>
+      </div>
+
+      <div>
+        <h3>Visual</h3>
+        <p>Use o botão de modo noturno para melhor conforto visual.</p>
+      </div>
+
+      <div class="copy">
+        © 2026 - Unidade Regional de Ensino - Região de Caieiras. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<script>
+  // Plugin simples para ordenar datas no formato DD/MM/YYYY
+  jQuery.extend(jQuery.fn.dataTable.ext.type.order, {
+    "date-br-pre": function (d) {
+      if (!d) return 0;
+      var parts = d.split('/');
+      return new Date(parts[2], parts[1] - 1, parts[0]).getTime();
+    },
+    "date-br-asc": function (a, b) {
+      return a - b;
+    },
+    "date-br-desc": function (a, b) {
+      return b - a;
+    }
+  });
+
+  $(document).ready(function () {
+    $('#legislacoesTable').DataTable({
+      pageLength: 10,
+      order: [[0, 'desc']], // Data mais recente primeiro
+      columnDefs: [
+        { type: 'date-br', targets: 0 } // Coluna Data
+      ],
+      language: {
+        search: "Buscar:",
+        lengthMenu: "Mostrar _MENU_ registros",
+        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        paginate: {
+          next: "Próximo",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark');
+  }
+</script>
+
+
+</body>
+</html>
+
