@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>CIPA GESTÃO - URE Caieiras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --text: #1f3a5f;
+      --primary: #2c6fb2;
+      --footer: #1f3a5f;
+    }
+
+    body.dark {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --primary: #60a5fa;
+      --footer: #020617;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e3a8a);
+      color: #fff;
+      padding: 25px 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .top-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    header p {
+      margin: 5px 0 0 0;
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    .btn {
+      background: #ffffff;
+      color: #1e3a8a;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    .btn-dark {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    /* CONTEÚDO */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 15px;
+    }
+
+    .table-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    table.dataTable {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      color: var(--text);
+    }
+
+    table.dataTable thead th {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px;
+    }
+
+    table.dataTable tbody td {
+      padding: 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    body.dark table.dataTable tbody td {
+      border-bottom: 1px solid #1f2933;
+    }
+
+    table.dataTable tbody tr:hover {
+      background: rgba(44,111,178,0.08);
+    }
+
+    a.download-link {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a.download-link:hover {
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--footer);
+      color: #cbd5f5;
+      padding: 25px 15px;
+      margin-top: 50px;
+    }
+
+    footer .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      align-items: center;
+    }
+
+    footer h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    footer p, footer a {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #cbd5f5;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    footer .copy {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="top-bar">
+      <div>
+        <h1>Equipe de Supervisão de Ensino - CIPA GESTÃO</h1>
+        <p>Unidade Regional de Ensino de Caieiras</p>
+      </div>
+
+      <div class="top-actions">
+        <a class="btn" href="index.html">🏠 Home</a>
+        <a class="btn" href="https://decaieiras.educacao.sp.gov.br" target="_self">
+          ⬅ Voltar para o site principal
+        </a>
+        <button class="btn btn-dark" onclick="toggleDarkMode()">
+          🌙 Modo noturno
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main>
+  
+  <img class="size-full wp-image-7899 aligncenter" src="https://midiasstoragesec.blob.core.windows.net/001/2025/10/banner_cipa.png" width="100%">
+  
+    <div class="table-card">
+      <table id="legislacoesTable" class="display">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Assunto</th>
+            <th>Arquivo</th>
+          </tr>
+        </thead>
+
+        <!-- COLE AQUI SEU TBODY (que já está ok) -->
+        <tbody>
+          <!-- 👇 COLE AQUI SUAS LINHAS <tr> DA TABELA -->
+		<tr>
+  <td>01/12/2025</td>
+  <td>ATA DE POSSE E INSTALAÇÃO DA ELEIÇÃO EXTRAORDINÁRIA DA CIPAA</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQCc1dyQFLFDTLZGKAy4L-mhAdyxFKtt-TOEwqL64d3zNIs?e=ZuEsBG">Download</a></td>
+</tr>
+
+<tr>
+  <td>28/11/2025</td>
+  <td>EDITAL DE CONVOCAÇÃO PARA REUNIÃO ORDINÁRIA CIPAA GESTÃO 2025/2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQCEaqu-XqHVTbBVC7sRw36YAeVzAvl7mVGJlF9ps0IVrqU?e=ROPSew">Download</a></td>
+</tr>
+
+<tr>
+  <td>28/11/2025</td>
+  <td>LISTAGEM DE RESULTADO DA CIPA</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQDs5CRCu00yQZ3gg9mViH3SAdysTH9XSNpInUtxgJkxMvs?e=d1PQvt">Download</a></td>
+</tr>
+
+<tr>
+  <td>28/11/2025</td>
+  <td>ATA DE DIVULGAÇÃO DO RESULTADO DA ELEIÇÃO EXTRAORDINÁRIA DA COMISSÃO INTERNA DE PREVENÇÃO DE ACIDENTES E ASSÉDIO – CIPA</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQBquTB1EkkiRZyoB4nBl4AxAeRMjtIhSeDp3ALii2xI6ho?e=A4Btez">Download</a></td>
+</tr>
+
+<tr>
+  <td>26/11/2025</td>
+  <td>PORTARIA DO COORDENADOR GERAL, N. 509 - EFETIVO EXERCICIO</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/IQAVkR9gz0jPQ73NyYnvN1INAXPA9M53ewXrGvl2rQoX2bw?e=bHpbA0">Download</a></td>
+</tr>
+
+<tr>
+  <td>13/11/2025</td>
+  <td>DIVULGAÇÃO DE INSCRITOS – ELEIÇÃO EXTRAORDINÁRIA DA CIPA 2025/2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EYwGz3Oh249EqhGLQ1anjngBZX6IbyM2DE--H3KR6p6b-Q?e=gLviet">Download</a></td>
+</tr>
+
+<tr>
+  <td>07/11/2025</td>
+  <td>PORTARIA, DE 4 DE NOVEMBRO DE 2025</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EdCOe5mFYHNGhvADmLAwMjwBmeqdr9hAa4XbH5FXlHfuYA?e=RUwXtR">Download</a></td>
+</tr>
+
+<tr>
+  <td>29/10/2025</td>
+  <td>EDITAL DE CONVOCAÇÃO PARA REUNIÃO ORDINÁRIA CIPA GESTÃO 2025/2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EduIc1AMZy5Fg3adPxu1wqgBvN2syTfK10yjur87QxvxIw?e=O9nBTL">Download</a></td>
+</tr>
+
+<tr>
+  <td>24/10/2025</td>
+  <td>PLANO DE TRABALHO – INSPEÇÃO DE SEGURANÇA NAS UNIDADES ESCOLARES</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EQcclB3CkKhPgeojdqXmko0B5ARzmzWKhB6B_YnbAzqozQ?e=nNvrm7">Download</a></td>
+</tr>
+
+<tr>
+  <td>24/10/2025</td>
+  <td>CONVOCAÇÃO PARA REALIZAÇÃO DE INSPEÇÃO DE SEGURANÇA</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EXBRtLKqek1Brp9EuThaWEQBErmh1rNtcqkzKNTXwLKxsA?e=t5FwgH">Download</a></td>
+</tr>
+
+<tr>
+  <td>13/10/2025</td>
+  <td>Assédio Sob o Aspecto Disciplinar</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EaKi2YOnKNdDqay-yOMG09IBzQAZkhvp1e8FGg-zNzJyRg?e=CNpZSe">Download</a></td>
+</tr>
+
+<tr>
+  <td>13/10/2025</td>
+  <td>Violência e Assédio Sexual no Trabalho - PERGUNTAS E RESPOSTAS</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/Edd8ufu2-7xFsnIX8h5FSf4BEh7k0u_T6prtblpbOrTOwA?e=5CdJOy">Download</a></td>
+</tr>
+
+<tr>
+  <td>10/10/2025</td>
+  <td>CONVOCAÇÃO PARA REUNIÃO EXTRAORDINÁRIA DA CIPA – GESTÃO 2025/2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EYH55WBZrXRLqGQ5LaV1Zz4BcVN4vOZWMJmMyKFP5H7VMg?e=Y27w5f">Download</a></td>
+</tr>
+
+<tr>
+  <td>09/10/2025</td>
+  <td>MANUAL PARA INSCRIÇÃO DE CANDIDATOS À ELEIÇÃO EXTRAORDINÁRIA DA CIPA – GESTÃO 2025/2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EQY9pvQs3OpAjRrvKG84uEcBGSTVcgWpTp9CGIXragzLJw?e=KlrYlR">Download</a></td>
+</tr>
+
+<tr>
+  <td>09/10/2025</td>
+  <td>EDITAL DE CONVOCAÇÃO PARA INSCRIÇÃO DE CANDIDATOS A MEMBROS DA CIPA</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EaEZXdprJlRGhjPEDwj8vUwB45af1anWODUBCzs6GpxGgw?e=X0gl6W">Download</a></td>
+</tr>
+
+<tr>
+  <td>08/10/2025</td>
+  <td>GUIA DE ENFRENTAMENTO AO ASSÉDIO SEXUAL EM ORGANIZAÇÕES PÚBLICAS</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EfKnPlLBfhlLpSKEI52TwhwBJZzqeuCmfBTS4ecEnuXVXA?e=2mYwPr">Download</a></td>
+</tr>
+
+<tr>
+  <td>30/09/2025</td>
+  <td>EDITAL DE CONVOCAÇÃO PARA REUNIÕES CIPA GESTÃO 2025/2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ESvJqMspubVMlXU30kpOCPwBDtihCEpjuJHHcXedvey1mQ?e=GiDcTf">Download</a></td>
+</tr>
+
+<tr>
+  <td>30/09/2025</td>
+  <td>EDITAL DE ELEIÇÃO EXTRAORDINÁRIA DA CIPA – GESTÃO 2025/2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ERoPJJk12SBKr_QT5hlHvBgBE3i7j6uB6LM-mbTVDzK2Ag?e=qDsUoY">Download</a></td>
+</tr>
+
+<tr>
+  <td>01/09/2025</td>
+  <td>CALENDÁRIO 2025-2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EeFAoOZd5NNBgMvV7zmMwagBWJGQmIRt4OEgaifpi1_arA?e=vxEJoI">Download</a></td>
+</tr>
+
+<tr>
+  <td>01/09/2025</td>
+  <td>CONVOCAÇÃO 2 REUNIÃO ORDINÁRIA</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EbEvDK8mED1Go3xnh8PL_-YBYNJYAdfuL8b-MU2SwusAGQ?e=l65QOO">Download</a></td>
+</tr>
+
+<tr>
+  <td>19/08/2025</td>
+  <td>MEMBROS - MANDATO 2025/2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EXsqzqVjXZBKjyJhAo9cA-sBdHovUPn0tyeVTFmODsciMQ?e=lrElYO">Download</a></td>
+</tr>
+
+<tr>
+  <td>19/08/2025</td>
+  <td>CONVOCAÇÃO PARA REUNIÃO EXTRAORDINÁRIA DA CIPA – GESTÃO 2025/2026</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ERBZ-agvckhIpEdXQCYTnAIB_8dEH4xr56yVCKsqZthhSQ?e=o599sj">Download</a></td>
+</tr>
+
+<tr>
+  <td>06/08/2025</td>
+  <td>COMUNICADO EXTERNO CONJUNTO SUBSECRETARIA/CGRH - 2023 - Nº 39</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EVQNUPy1fnxGth4Ef16507YBL0bRCggzWqY7YK9TIWH9QQ?e=zG1cSk">Download</a></td>
+</tr>
+
+<tr>
+  <td>06/08/2025</td>
+  <td>CARTILHA DE PREVENÇÃO E COMBATE AO ASSÉDIO MORAL E SEXUAL NO AMBIENTE DE TRABALHO</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/Ed8k4EWBEnZOhkNNGDW4HioBpFadj97-q2RsZeTnaid9IA?e=awef4N">Download</a></td>
+</tr>
+
+<tr>
+  <td>06/08/2025</td>
+  <td>ABERTURA DE COMUNICAÇÃO DE ACIDENTE DE TRABALHO - CAT</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EYjaUybTLK1LkvgzLXVw26UBXvQz5pQVZB1SHHseEDWetg?e=Hl9vHQ">Download</a></td>
+</tr>
+
+<tr>
+  <td>06/08/2025</td>
+  <td>ACIDENTE DE TRABALHO</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EdLIBNglRk5EqZvSgZGzzbMBEvaojBloQp5XT59rqg23Mw?e=QwgnUM">Download</a></td>
+</tr>
+
+<tr>
+  <td>06/08/2025</td>
+  <td>ASSÉDIO MORAL E SEXUAL</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EUngrvElM59MrslNrRyl4dQBu1247KiaQtGRlMQkpt7-gg?e=Bj6OSb">Download</a></td>
+</tr>
+
+<tr>
+  <td>06/08/2025</td>
+  <td>NOTIFICAÇÃO DE ACIDENTE DE TRABALHO - NAT</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EZ_5gU021_5Pn7VXmeE9nukBjSvKsbjO_Fq--1plHVlEuw?e=bCzwhV">Download</a></td>
+</tr>
+
+<tr>
+  <td>06/08/2025</td>
+  <td>CALENDÁRIO REUNIÕES ORDINÁRIAS DA CIPA</td>
+  <td><a href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EfwXDNCT775JvnqBbGfUlQ0BPxs39lM0WzDgNcpxaqWlog?e=b7Zsg6">Download</a></td>
+</tr>
+
+<tr>
+  <td>06/08/2025</td>
+  <td>PROGRAMA DE SAÚDE OCUPACIONAL DO SERVIDOR - PSOS</td>
+  <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EUcj7S7zAiJKpMk2GRfWsL4Bbhg7vC4wNVTM2CLW4KzArQ?e=T684Al">Download</a></td>
+</tr>
+
+<tr>
+  <td>05/08/2025</td>
+  <td>Manual dos Cipeiros</td>
+  <td><a href="https://midiasstoragesec.blob.core.windows.net/001/2025/08/manual-dos-cipeiros-caieiras-05082025.pdf">Download</a></td>
+</tr>
+
+		
+
+		</tbody>
+
+      </table>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Unidade Regional de Ensino de Caieiras</h3>
+        <p>Equipe de Supervisão de Ensino</p>
+        <p>Secretaria da Educação do Estado de São Paulo</p>
+      </div>
+
+      <div>
+        <h3>Atalhos</h3>
+        <p><a href="https://decaieiras.educacao.sp.gov.br">Site principal</a></p>
+        <p><a href="#">Topo da página</a></p>
+      </div>
+
+      <div>
+        <h3>Visual</h3>
+        <p>Use o botão de modo noturno para melhor conforto visual.</p>
+      </div>
+
+      <div class="copy">
+        © 2026 - Unidade Regional de Ensino - Região de Caieiras. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<script>
+  // Plugin simples para ordenar datas no formato DD/MM/YYYY
+  jQuery.extend(jQuery.fn.dataTable.ext.type.order, {
+    "date-br-pre": function (d) {
+      if (!d) return 0;
+      var parts = d.split('/');
+      return new Date(parts[2], parts[1] - 1, parts[0]).getTime();
+    },
+    "date-br-asc": function (a, b) {
+      return a - b;
+    },
+    "date-br-desc": function (a, b) {
+      return b - a;
+    }
+  });
+
+  $(document).ready(function () {
+    $('#legislacoesTable').DataTable({
+      pageLength: 10,
+      order: [[0, 'desc']], // Data mais recente primeiro
+      columnDefs: [
+        { type: 'date-br', targets: 0 } // Coluna Data
+      ],
+      language: {
+        search: "Buscar:",
+        lengthMenu: "Mostrar _MENU_ registros",
+        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        paginate: {
+          next: "Próximo",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark');
+  }
+</script>
+
+
+</body>
+</html>
+
