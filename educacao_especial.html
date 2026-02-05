@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Educação Especial - URE Caieiras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+  <style>
+ :root {
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --text: #1f3a5f;
+      --primary: #2c6fb2;
+      --footer: #1f3a5f;
+    }
+
+    body.dark {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --primary: #60a5fa;
+      --footer: #020617;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e3a8a);
+      color: #fff;
+      padding: 25px 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .top-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    header p {
+      margin: 5px 0 0 0;
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    .btn {
+      background: #ffffff;
+      color: #1e3a8a;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    .btn-dark {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    /* CONTEÚDO */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 15px;
+    }
+
+    .table-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    table.dataTable {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      color: var(--text);
+    }
+
+    table.dataTable thead th {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px;
+    }
+
+    table.dataTable tbody td {
+      padding: 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    body.dark table.dataTable tbody td {
+      border-bottom: 1px solid #1f2933;
+    }
+
+    table.dataTable tbody tr:hover {
+      background: rgba(44,111,178,0.08);
+    }
+
+    a.download-link {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a.download-link:hover {
+      text-decoration: underline;
+    }
+
+    /* TABS */
+    .tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+    .tab-btn {
+      padding:10px 16px; border:none; border-radius:8px;
+      background:#e5ecf6; cursor:pointer; font-weight:600;
+    }
+    .tab-btn.active { background:var(--primary); color:#fff; }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+
+    table.dataTable thead th { background:var(--primary); color:#fff; }
+
+    a.download-link { color:var(--primary); font-weight:600; text-decoration:none; }
+
+/* RODAPÉ */
+    footer {
+      background: var(--footer);
+      color: #cbd5f5;
+      padding: 25px 15px;
+      margin-top: 40px;
+    }
+
+    footer .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      align-items: center;
+    }
+
+    footer h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    footer .copy {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+	
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="top-bar">
+    <div>
+      <h1>Equipe de Supervisão de Ensino - Educação Especial</h1>
+      <p>Unidade Regional de Ensino de Caieiras</p>
+    </div>
+    <div class="top-actions">
+      <a class="btn" href="index.html">🏠 Home</a>
+      <a class="btn" href="https://decaieiras.educacao.sp.gov.br">⬅ Voltar para o site principal</a>
+      <button class="btn btn-dark" onclick="toggleDarkMode()">🌙 Modo noturno</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="table-card">
+  
+  <table>
+	<tbody>
+    
+	<tr><td>Última Atualização:</td>
+	<td><strong>19/05/2025</strong></td></tr>
+    
+    <tr><td>Acesso Rápido:</td>
+	<td>Educação Especial – Convênio OSC – Escolas de Educação Especial – Tutorial da SED para preenchimento das informações no cadastro de aluno elegível aos serviços e apoios da  Educação Especial.    <a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/Ed7k0kW-nrBLlMIAhyk353wB__RbnhaVkGBGyshDwdWS-A?e=LcGeCR" target="_blank" rel="noopener noreferrer">
+    <strong>Acessar Documento</a></strong></td></tr>
+    
+	</tbody>
+  </table>
+
+    <hr />
+    
+    <img class="size-full wp-image-7899 aligncenter" src="https://midiasstoragesec.blob.core.windows.net/001/2025/05/banner_educao-especial.png" width="100%">
+    
+    <hr />
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="openTab(event,'tab1')">Educação Especial: Convênio OSC</button>
+      <button class="tab-btn" onclick="openTab(event,'tab2')">Escolas Estaduais – Fundamento Legal</button>
+      <button class="tab-btn" onclick="openTab(event,'tab3')">Escolas Estaduais – Condições Especiais</button>
+      <button class="tab-btn" onclick="openTab(event,'tab4')">Escolas Estaduais – Atendimento Educacional Especializado – AEE</button>
+      <button class="tab-btn" onclick="openTab(event,'tab5')">Escolas Estaduais – LIBRAS</button>
+      <button class="tab-btn" onclick="openTab(event,'tab6')">Escolas Estaduais – Profissional de Apoio Escolar – Atividades Escolares (PAE-AE)</button>
+      <button class="tab-btn" onclick="openTab(event,'tab7')">Escolas Estaduais – Profissional de Apoio Escolar – Atividades de Vida Diária (PAE-AVD)</button>
+      <button class="tab-btn" onclick="openTab(event,'tab8')">Escolas Estaduais – Professor Especializado</button>
+      <button class="tab-btn" onclick="openTab(event,'tab9')">Escolas Estaduais – Projeto Ensino Colaborativo</button>
+      <button class="tab-btn" onclick="openTab(event,'tab10')">Escolas Estaduais – Recursos Pedagógicos, de Acessibilidade e de Tecnologia Assistiva</button>
+      <button class="tab-btn" onclick="openTab(event,'tab11')">Escolas Estaduais – Atuação ESE/NPE</button>
+      <button class="tab-btn" onclick="openTab(event,'tab12')">Escolas Municipais e Particulares – Fundamento Legal</button>
+      <button class="tab-btn" onclick="openTab(event,'tab13')">Escolas Municipais e Particulares – Condições Especiais</button>
+      <button class="tab-btn" onclick="openTab(event,'tab14')">Escolas Municipais e Particulares – Atuação DER/SME</button>
+    </div>
+
+    <!-- TAB 1 -->
+    <div id="tab1" class="tab-content active">
+      <table id="tabela1" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+        
+              <tr>
+              <td>Tutorial SED</td>
+              <td>Tutorial da SED para preenchimento das informações no cadastro de aluno elegível aos serviços e apoios da Educação Especial.</td>
+              <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EVEKIoz64E1InZcVGpEuGr4BOT4K0EqkDlOTcmhdlzSe4A?e=T5pNu0" target="_blank" rel="noopener noreferrer">Download</a></td>
+              </tr>
+            
+              <tr>
+              <td>Resolução SEDUC</td>
+              <td>Resolução SEDUC Nº 89, de 01-11-2024, que aprova Plano de Trabalho, para vigência a partir de 2025, como parte integrante do Termo de Colaboração que tem por objetivo o atendimento pedagógico (escolarização) a educandos que necessitam de apoio intermitente, limitados ou permanente-pervasivo com Deficiência Intelectual ou deficiência múltipla associada à Deficiência Intelectual e de apoio substancial ou muito substancial com Transtorno do Espectro Autista ou Deficiência Múltipla associada ao Transtorno do Espectro Autista, que não puderem ser beneficiados pela inclusão em classes comuns do ensino regular.</td>
+              <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EemTJ4dpuy1GnZsaZyHly98BZKDLzFmlqzC4PsHB_AoFqA?e=yVFIID" target="_blank" rel="noopener noreferrer">Download</a></td>
+              </tr>
+            
+            <tr>
+              <td>Decreto Estadual</td>
+              <td>Decreto nº 62.294, de 06-12-2016, que autoriza a Secretaria da Educação a representar o Estado na celebração de termos de colaboração, com organizações da sociedade civil, sem fins lucrativos, atuantes, em educação especial, selecionadas por chamamento público ou previamente credenciadas pela Pasta, com o objetivo de promover o atendimento a educandos com graves deficiências que não puderam ser beneficiados pela inclusão em classes comuns de ensino regular, e dá providências correlatas.</td>
+              <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ESzmvDhxqI9DlyVI1-7siPEBhAwkK9qSlB-P-6UTqGtZnQ?e=1gi68A" target="_blank" rel="noopener noreferrer">Download</a></td>
+            </tr>
+            
+            <tr>
+              <td>Orientação CAPE – Limite de Idade</td>
+              <td>Documento Orientador da SEDUC-CAPE sobre o assunto limite de idade para oferta de Educação Básica nas Escolas participantes do Convênio.</td>
+              <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EYjV32pTXr5MvIYUEUd4KRABqYdpHEmEI5LuJCkMgFXIEw?e=lLqMzW" target="_blank" rel="noopener noreferrer">Download</a></td>
+            </tr>
+            
+            <tr>
+              <td>COLABORAÇÃO - OSC</td>
+              <td>ASSOCIAÇÃO DE PAIS E AMIGOS DOS EXCEPCIONAIS DE CAIEIRAS</td>
+              <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/Ed3mtTuONIxGlfbxL0MzwFcBk-7md5FbQaNcM2iX4B0png?e=UWnkZf" target="_blank" rel="noopener noreferrer">Download</a></td>
+            </tr>
+            
+            <tr>
+              <td>COLABORAÇÃO - OSC</td>
+              <td>ASSOCIACAO DE PAIS E AMIGOS DOS EXCEPCIONAIS DE CAJAMAR</td>
+              <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EQoPsxwa_RlFqgHHO3yTV1sBx-7Yp74RIa-R5SmhB_SviA?e=WLMAhf" target="_blank" rel="noopener noreferrer">Download</a></td>
+            </tr>
+            
+            <tr>
+              <td>COLABORAÇÃO - OSC</td>
+              <td>ASSOCIAÇÃO DE PAIS E AMIGOS DOS EXCEPCIONAIS FCO MORATO</td>
+              <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EcYNd_RCiAZIgyecJHmZ_AsBniRWFbHGvrTINNQ7pF4KFQ?e=pNkZ5X" target="_blank" rel="noopener noreferrer">Download</a></td>
+            </tr>
+            
+            <tr>
+              <td>COLABORAÇÃO - OSC</td>
+              <td>APAE ASSOCIACAO DE PAIS E AMIGOS DOS EXCEPCIONAIS DE MAIRIPORA</td>
+              <td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/Eerqe-j37p5JhnUaLBbihfABGwRmk-Qf7GR34dGRHAGi8g?e=EGldA6" target="_blank" rel="noopener noreferrer">Download</a></td>
+            </tr>
+            
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB 2 -->
+    <div id="tab2" class="tab-content">
+      <table id="tabela2" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+
+		<tr><td>Deliberação CEE</td><td>Deliberação CEE nº 59/2006, estabelece condições especiais de atividades escolares de aprendizagem e avaliação, para discentes cujo estado de saúde as recomende.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EYW3lvFkGLVAn8RMovklLjUB-A6oDeA9fbwTk226Lqjtsg?e=klfdPl" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Deliberação CEE</td><td>Deliberação CEE nº 68/2007, fixa normas para a educação de alunos que apresentam necessidades educacionais especiais, no sistema estadual de ensino.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ET5TmOnItv1OhJEAkpVdr8sB3oOPlSz8YpMcZLet8Zkc3w?e=IhAbew" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Deliberação CEE</td><td>Deliberação CEE nº 149/2016, que estabelece normas para a educação especial no sistema estadual de ensino.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EQOFvhXZZXBDgbRvGcxgEBQBfw4riyM_0f2LexZGOB9H6A?e=Z5Czyd" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Documento Orientador</td><td>Política de Educação Especial do Estado de São Paulo – 2021.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EeJ2vsbc0VZOtOmATWvreJsBv8MbL-guJDLveudGFaYNCA?e=gPatE4" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Decreto Estadual</td><td>Decreto Nº 67.635, de 06-04-2023, que dispõe sobre a Educação Especial na rede estadual de ensino e dá providências correlatas.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EegTI2XDmENAuWFiii-1s6sBI9iQ615nk5WpP3X8xZ9dfw?e=wagmOW" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Decreto Estadual</td><td>Decreto Nº 67.634, de 06-04-2023, que institui o Plano Estadual Integrado para Pessoas com Transtorno do Espectro do Autismo – PEIPTEA e dá providências correlatas.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EfJqVOY4eAhBgg8s-Hnbs60BxwvIrCy5cURnpck4tv_xrg?e=npm2iV" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Lei Estadual</td><td>Lei Nº 16.279, de 08-07-2016, aprova o Plano Estadual de Educação de São Paulo e dá outras providências.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EVc9PZdWI65KtraegfGvKLgBFRIUY9cp0BFnEqberxo6Dw?e=yWDCZS" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Lei Estadual</td><td>Lei Nº 17.669, de 06-04-2023, que dispõe sobre o prazo de validade do laudo médico pericial que atesta o Transtorno do Espectro Autista – TEA.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/Ef3YRcE1tK5At5n4RwUh3M4BrV1S00wECNkK-Uf2sFkFsw?e=j1iaaZ" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Lei Estadual</td><td>Lei Nº 17.759, de 20-09-2023, dispõe sobre o Protocolo Individualizado de Avaliação (PIA) para os alunos com Transtornos Globais do Desenvolvimento, incluindo-se o Transtorno do Espectro Autista (TEA), nas instituições de ensino de todo o Estado.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/Eefh9yFqym1MmEasBOEfGCwBiNiQ2nK1BLHzqmVFgXoV7Q?e=GNPzsv" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Lei Federal</td><td>Lei Nº 12.764, de 27-12-2012, institui a Política Nacional de Proteção dos Direitos da Pessoa com Transtorno do Espectro Autista.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EUWzVK8f635As1yqqDMYnukBJK27DuVJESisG-3vIzHb-Q?e=SJqfqW" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Lei Federal</td><td>Lei Nº 13.146, de 06-07-2015, Estatuto da Pessoa com Deficiência.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EfcdkE-juelNoLiiJvCnaTEBGEINcGiFEO21-iSQnSjkFg?e=gxYGCx" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Nota</td><td>Nota Técnica MEC - Nº 24 de 21-03-2013 (Verificar)</td><td></td></tr>
+<tr><td>Resolução SEDUC</td><td>Resolução SEDUC nº 04, de 02-10-2009, Institui Diretrizes Operacionais para o Atendimento Educacional Especializado na Educação Básica.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ERQxHx8vok1AiVlbvsvTP4cB22MMzmt5IuWARtHsGbKFQQ?e=HeHz9V" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Resolução SEDUC</td><td>Resolução SEDUC nº 25, de 01-04-2016, dispõe sobre atendimento escolar domiciliar.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EUp5QUmg6L9CpJWL04DUfoUB2HGSSsGm9otKu8jWl1qI8w?e=oCRrec" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Resolução SEDUC</td><td>Resolução SEDUC nº 21, de 21-06-2023, que dispõe sobre a regulamentação da Política de Educação Especial do Estado de São Paulo.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EUQA2C3YM5xDlhzaXcmKnCEBU6bBgzlsJbrnfs0SUl60WQ?e=luWk5j" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Decreto Federal</td><td>Decreto Nº 8.368, de 02-12-2014, regulamenta a Lei nº 12.764.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EdiDXZqrvpBGly3pTv90tBQBctlfp8YWmP1ZHcSjRn4fFg?e=N1i6FJ" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Decreto Estadual</td><td>Decreto Nº 68.415, de 02-04-2024, que dispõe sobre a presença de atendente pessoal nas unidades escolares.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EVSFgxxYcDJGmJrwyEhaLSMBm2gttJD7V2DHHuA1FtkwJw?e=r4K59g" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+<tr><td>Documento Orientador</td><td>Orientações para as Escolas Estaduais sobre o Decreto nº 68.415 de 02 de abril de 2024 – CAPE/SEDUC.</td><td><a href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EaS1Sy4S8sNDshi-xYUio2QB7UhfrpPa96kKM3aXBratvQ?e=IZ9HLj" target="_blank" rel="noopener noreferrer">Download</a></td></tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB 3 -->
+    <div id="tab3" class="tab-content">
+      <table id="tabela3" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+			
+            <tr>
+  <td><span>Deliberação CEE</span></td>
+  <td><span>Deliberação CEE Nº 59/2006, que estabelece condições especiais de atividades escolares de aprendizagem e avaliação, para discentes cujo estado de saúde as recomende.</span></td>
+  <td><a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EZ89OCwf0wtFinCimaawdHIBcOe4Xn9ArF5y6Y03kibIQw?e=Tau4gQ" target="_blank" rel="noopener noreferrer">Download</a></td>
+</tr>
+<tr>
+  <td><span>Lei Estadual</span></td>
+  <td><span>Lei Nº 17.759, de 20-09-2023, que dispõe sobre o Protocolo Individualizado de Avaliação (PIA) para os alunos com Transtornos Globais do Desenvolvimento, incluindo-se o Transtorno do Espectro Autista (TEA), nas instituições de ensino de todo o Estado.</span></td>
+  <td><a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EavAn7UI_kBAi8sjXEhfwCkBuY4T2Yys70Aci1R-9NjbrQ?e=muig1a" target="_blank" rel="noopener noreferrer">Download</a></td>
+</tr>
+<tr>
+  <td><span>Resolução SEDUC</span></td>
+  <td><span>Resolução SE 25, de 1-4-2016, que dispõe sobre atendimento escolar domiciliar a alunos impossibilitados de frequentar as aulas em razão de tratamento de saúde que implique permanência prolongada em ambiente domiciliar, e dá providências correlatas.</span></td>
+  <td><a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EZteTb47m65EjrwuDE7Im3YBJ87w4xRXINYRyboaZW8TlQ?e=fgdB6X" target="_blank" rel="noopener noreferrer">Download</a></td>
+</tr>
+<tr>
+  <td><span>Transtorno do Espectro Autista (TEA) – Orientações</span></td>
+  <td><span>Orientações para as Escolas Estaduais de Ensino Fundamental e Médio de São Paulo.</span></td>
+  <td><a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EeYqV57zFU5OhaxihI1iosgB4_yy81QYJ9evO1smdkx5VA?e=54Qbzc" target="_blank" rel="noopener noreferrer">Download</a></td>
+</tr>
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- TAB 4 -->
+    <div id="tab4" class="tab-content">
+      <table id="tabela4" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+<tr>
+  <td><span>Resolução SEDUC</span></td>
+  <td><span>Resolução SEDUC nº 21, de 21-6-2023, que dispõe sobre a regulamentação da Política de Educação Especial do Estado de São Paulo e do Plano Integrado para Pessoas com Transtorno do Espectro do Autismo – TEA, com destaque para o AEE.</span></td>
+  <td><a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EXYRV6jh6iBBuIIS4ldEleUBM-xdyKZ-WAwKnduLglyuQQ?e=7xRE1c" target="_blank" rel="noopener noreferrer">Download</a></td>
+</tr>
+<tr>
+  <td><span>Instrução COPED Nº 3/2023</span></td>
+  <td><span>Instrução Normativa Coordenadoria Pedagógica, que dispõe sobre orientações e procedimentos quanto ao Atendimento Educacional Especializado AEE, em conformidade com o Decreto nº 67.635, de 06 de abril de 2023 e a Resolução SEDUC 21, de 21 de junho de 2023.</span></td>
+  <td><a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EfHdERPh4HlFqI5q3ysFTTgB7oCzpIJlFrds-n-qWRYrrg?e=bJvx9i" target="_blank" rel="noopener noreferrer">Download</a></td>
+</tr>
+<tr>
+  <td><span>API</span></td>
+  <td><span>Avalição Pedagógica Inicial atualizada pela Instrução COPED 3/2023 – Anexo I da Resolução SEDUC 21/2023.</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+<tr>
+  <td><span>PAEE</span></td>
+  <td><span>Plano de Atendimento Educacional Especializado atualizado pela Instrução COPED 3/2023 – Anexo II da Resolução SEDUC 21/2023.</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+<tr>
+  <td><span>Autorização de AEE – Sala de Recurso</span></td>
+  <td><span>Autorização de Atendimento Educacional Especializado (AEE) na forma de Sala de Recurso aos estudantes elegíveis da Educação Especial nos termos da Resolução SEDUC nº 21/2023 (oferta/ampliação).</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+<tr>
+  <td><span>Autorização de AEE – Itinerante</span></td>
+  <td><span>Autorização de Atendimento Educacional Especializado (AEE) itinerante em espaço multiuso aos estudantes elegíveis da Educação Especial nos termos da Resolução SEDUC nº 21/2023 (oferta/ampliação).</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+<tr>
+  <td><span>Escolas com AEE – 2025</span></td>
+  <td><span>Lista das Escolas Estaduais com turmas ativas de AEE em 2025.</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- TAB 5 -->
+    <div id="tab5" class="tab-content">
+      <table id="tabela5" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+
+		<tr>
+  <td><span>Resolução SEDUC</span></td>
+  <td><span>Resolução SE 8, de 29-1-2016, que dispõe sobre a atuação de docentes com habilitação/qualificação na Língua Brasileira de Sinais – LIBRAS, nas escolas da rede estadual de ensino, e dá providências correlatas.</span></td>
+  <td><a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/Eb02oovA1_1Di6dXU2JLsfkBSgMR6grc5DXVb2P5PowiHg?e=V3qzuG" target="_blank" rel="noopener noreferrer">Download</a></td>
+</tr>
+<tr>
+  <td><span>Resolução SEDUC</span></td>
+  <td><span>Resolução SEDUC 12, de 1-2-2022, que acrescenta dispositivos na Resolução SE 8, de 29-1-2016, que dispõe sobre a atuação de docentes com habilitação/qualificação na Língua Brasileira de Sinais – LIBRAS, nas escolas da rede estadual de ensino, e dá providências correlatas.</span></td>
+  <td><a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EVCfdbr-WfNPq9jAupA400oBXY2j_kD-BEUeCmRx0s_NpA?e=xrgUW1" target="_blank" rel="noopener noreferrer">Download</a></td>
+</tr>
+<tr>
+  <td><span>Resolução SEDUC</span></td>
+  <td><span>Resolução SEDUC 41, de 1-6-2022, que dispõe sobre as atribuições dos integrantes do quadro do magistério – QM em atuação no Programa Ensino Integral – PEI.</span></td>
+  <td><a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EXDWZo4-3LJHkHAsZejCp_gBXI4f7SyeX2-FYoYzj937Dw?e=rfUjCP" target="_blank" rel="noopener noreferrer">Download</a></td>
+</tr>
+<tr>
+  <td><span>Modelo Edital</span></td>
+  <td><span>Modelo de Edital para atribuição de interlocutor/intérprete de LIBRAS deve ser utilizado pela Escola sempre que necessário, visando o atendimento de aluno surdo ou surdocego, que utilize LIBRAS ou LIBRAS tátil.</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- TAB 6 -->
+    <div id="tab6" class="tab-content">
+      <table id="tabela6" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- TAB 7 -->
+    <div id="tab7" class="tab-content">
+      <table id="tabela7" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+<tr>
+  <td><span>Orientações Gerais</span></td>
+  <td><span>Orientações para os Diretores de Escola sobre a solicitação de PAE-AVD.</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+
+<tr>
+  <td><span>Documentos para solicitação de PAE-AVD</span></td>
+  <td><span>Modelos de Solicitação de PAE AVD e PAE AE</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EbXEM3xqHi9PnswEUw7DLuQBPgJdYmit48vfQfpWzjL-xQ?e=RFJVks" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Documentos para solicitação de PAE-AVD</span></td>
+  <td><span>Mapeamento do Aluno</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EcCgvqmRxGtHrhpAdK2MRosB_y7sH4iWH-WNK_qNm0oSpw?e=O2Ghdv" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Documentos para solicitação de PAE-AVD</span></td>
+  <td><span>Laudo Médico (Anexo 2)</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EfzWBXBdc_pDqgl6VoLfq6sBY3s3rEStPzJ9s9Alitm9xQ?e=ROGT43" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Documentos para solicitação de PAE-AVD</span></td>
+  <td><span>Solicitação do Responsável (Anexo 3)</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EWPrm65ij5ZAropvOfvexqABvO45WcivFaWLjkFyt0djWw?e=FnQIs9" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Documentos para solicitação de PAE-AVD</span></td>
+  <td><span>Termo de Ciência/Responsabilidade (Anexo 4)</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ETISpNqj505LncN5HgWWdiUBrBJDqWwY1A0Z5getvDbz4g?e=SPCkD9" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Documentos para solicitação de PAE-AVD</span></td>
+  <td><span>Questionário do Aluno (Anexo 5)</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ER3xFXKYeP5FmaIsIq2omCQBhype0I9N_9rkVxOQUsA_Gg?e=9xKZ8C" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Documentos para solicitação de PAE-AVD</span></td>
+  <td><span>Ficha SED – Cadastro de Aluno (Anexo 7)</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:w:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ETAhXaBL2INMm00hFgdMPDsBOFOof1veK8jq73dxvmazcQ?e=HbGoi9" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Relatório Mensal</span></td>
+  <td><span>Relatório Mensal de Avaliação (Co-Gestor).</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- TAB 8 -->
+    <div id="tab8" class="tab-content">
+      <table id="tabela8" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+<tr>
+  <td><span>Indicação CEE</span></td>
+  <td><span>Indicação CEE nº 213/2021, com orientação sobre habilitação/qualificação de docentes para ministrar aulas nas disciplinas do currículo da Educação Básica – Ensino Fundamental e Ensino Médio no Estado de São Paulo.</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EZq5rFVHkE1PkKwYOZx7v0YBnlzu3lFZqw6WF9dV5wBUyQ?e=xo8rww" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- TAB 9 -->
+    <div id="tab9" class="tab-content">
+      <table id="tabela9" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+<tr>
+  <td><span>Comunicado SEDUC</span></td>
+  <td><span>Comunicado Externo Conjunto Subsecretaria/COPED/DEMOD/CAPE/CGRH nº 286/2023.</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ER6Esul6tCBFrf_et2Ems4UBKtH-A5czm0br7IeJrjqlGQ?e=i0dyMF" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Modelo Edital</span></td>
+  <td><span>Modelo de Edital para atribuição de professores especializados do Projeto Ensino Colaborativo, que deve ser utilizado pela Escola sempre que necessário.</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+
+<tr>
+  <td><span>Documento Orientador</span></td>
+  <td><span>Ensino Colaborativo na Rede Pública de Ensino do Estado de São Paulo – 2021.</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EVGvDdnvyAlFvBzo_KE2iycBsIpZtqeFBHMG4vZxPiKClQ?e=YM0Xx6" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Documento</span></td>
+  <td><span>Competências dos profissionais envolvidos no Projeto Ensino Colaborativo.</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+
+<tr>
+  <td><span>Documento</span></td>
+  <td><span>Plano de Trabalho do Professor Especializado do Projeto Ensino Colaborativo.</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+
+<tr>
+  <td><span>Documento</span></td>
+  <td><span>Ficha de Acompanhamento do PAEE.</span></td>
+  <td><span>Download (breve)</span></td>
+</tr>
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- TAB 10 -->
+    <div id="tab10" class="tab-content">
+      <table id="tabela10" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+
+		<tr>
+  <td><span>Norma Brasileira</span></td>
+  <td><span>ABNT NBR 9050 – Acessibilidade a edificações, mobiliário, espaços e equipamentos urbanos.</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EaAZclGr3WRGhkP2-V4eaakBCP83pO9P79bhd6tond8RNA?e=ztVpaL" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Programa Sala de Recurso – FNDE</span></td>
+  <td><span>Resolução, Manual do diretor de escola e itens para aquisição pertinentes ao Programa Sala de Recurso – FNDE.</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ERQfPD2SiIxAn_u6Kk-52PMBRW-wcS3v7myQBf6D5MxGKA?e=DpXWMO" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Portaria Empréstimo de Tablet para alunos com deficiência visual</span></td>
+  <td><span></span></td>
+  <td><span></span></td>
+</tr>
+
+<tr>
+  <td><span>Documento Orientador</span></td>
+  <td><span>Plataformas Educacionais – Educação Especial – 2024.</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ETcTeNQHzeVHgFvQHllh11ABbif5__I4mqDZOtj2be2UUw?e=AhxQPx" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td><span>Comunicado</span></td>
+  <td><span>Comunicado Externo Conjunto Subsecretaria / COPED – 2024 – Nº 141, item 3, do Boletim Semanal Subsecretaria – Ano: 2024 – Nº 21 – 29 de maio de 2024.</span></td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EZQfUCADY4hKiDsbkYkcAukBOZzfYVmoTP_rS2QkcEgKyw?e=VApvqj" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- TAB 11 -->
+    <div id="tab11" class="tab-content">
+      <table id="tabela11" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+<tr>
+  <td>Instrução para anexar documentos na SED</td>
+  <td>
+    Tutorial UPLOAD encaminhado pelo CAPE/SEDUC – via Boletim Semanal Subsecretaria de 06/09/2024 e Comunicado Externo Conjunto Subsecretaria / COPED nº 232/2024.
+  </td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EZOY65A3yK5FlzoK4Vbyrb0BUsNevhAflbpM3qHmzh--JQ?e=xYrJJK" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- TAB 12 -->
+    <div id="tab12" class="tab-content">
+      <table id="tabela12" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+<tr>
+  <td>Deliberação CEE</td>
+  <td>
+    Deliberação CEE nº 149/2016, que estabelece normas para a Educação Especial no sistema Estadual de Ensino.
+  </td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EWg3wkB2Xc1AnlYz3xM1BScBbhTAUxVICYgEQ7qIK2jlIg?e=VGCTxG" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td>Lei Estadual</td>
+  <td>
+    Lei Nº 17.669, de 06-04-2023, que dispõe sobre o prazo de validade do laudo médico pericial que atesta o Transtorno do Espectro Autista – TEA.
+  </td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ER5GjUgDmsVCr6_E3pmNVM4B5qAJLJJr2e3C88VfmGU3iw?e=YXAeW3" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td>Indicação CEE</td>
+  <td>
+    Indicação CEE nº 213/2021, com orientação sobre habilitação/qualificação de docentes para ministrar aulas nas disciplinas do currículo da Educação Básica – Ensino Fundamental e Ensino Médio no Estado de São Paulo.
+  </td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ESIZRxoBcslEtqXQR-03ZNUBCizOCHddswocR7A-AvL_mw?e=cdQP85" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- TAB 13 -->
+    <div id="tab13" class="tab-content">
+      <table id="tabela13" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+        
+<tr>
+  <td>Deliberação CEE</td>
+  <td>
+    Deliberação CEE Nº 59/2006, que estabelece condições especiais de atividades escolares de aprendizagem e avaliação, para discentes cujo estado de saúde as recomende.
+  </td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/EQdfnMa3SgVOg0iJDAgNJEMBqzVcKeSrodGW4lGdkOHqxw?e=e4TWt0" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+<tr>
+  <td>Lei Estadual</td>
+  <td>
+    Lei Nº 17.759, de 20-09-2023, que dispõe sobre o Protocolo Individualizado de Avaliação (PIA) para os alunos com Transtornos Globais do Desenvolvimento, incluindo-se o Transtorno do Espectro Autista (TEA), nas instituições de ensino de todo o Estado.
+  </td>
+  <td>
+    <a class="l1 external" href="https://seesp-my.sharepoint.com/:b:/g/personal/jhonatas_almeida_educacao_sp_gov_br/ETOh1-4tyO5PhSE8Do_BNpwBC2LtJa9OvIndVSm3a07r1A?e=AbYVEw" target="_blank" rel="noopener noreferrer">Download</a>
+  </td>
+</tr>
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- TAB 14 -->
+    <div id="tab14" class="tab-content">
+      <table id="tabela14" class="display">
+        <thead>
+          <tr><th>Documento</th><th>Assunto</th><th>Download</th></tr>
+        </thead>
+        <tbody>
+
+
+        </tbody>
+      </table>
+    </div>            
+    
+        
+    
+  </div>
+</main>
+                           
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Unidade Regional de Ensino de Caieiras</h3>
+        <p>Equipe de Supervisão de Ensino</p>
+        <p>Secretaria da Educação do Estado de São Paulo</p>
+      </div>
+
+      <div>
+        <h3>Atalhos</h3>
+        <p><a href="https://decaieiras.educacao.sp.gov.br" style="color:#cbd5f5;">Site principal</a></p>
+        <p><a href="#" style="color:#cbd5f5;">Topo da página</a></p>
+      </div>
+
+      <div>
+        <h3>Visual</h3>
+        <p>Use o botão de modo noturno para melhor conforto visual.</p>
+      </div>
+
+      <div class="copy">
+        © 2026 - Unidade Regional de Ensino - Região de Caieiras. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<script>
+function toggleDarkMode(){ document.body.classList.toggle('dark'); }
+
+function openTab(evt, tabId){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+
+$(document).ready(function(){
+  $('#tabela1').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela2').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela3').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela4').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela5').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela6').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela7').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela8').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela9').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela10').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela11').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela12').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela13').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+  $('#tabela14').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });        
+  
+});
+</script>
+
+</body>
+</html>
+
+
+
