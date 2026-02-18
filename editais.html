@@ -220,10 +220,11 @@
     <!-- TABS -->
     <div class="tabs">
       <button class="tab-btn active" onclick="openTab(event,'tab1')">Diretor de Escola</button>
-      <button class="tab-btn" onclick="openTab(event,'tab2')">Supervisor de Ensino</button>
-      <button class="tab-btn" onclick="openTab(event,'tab3')">Professor Especialista em Currículo – PEC</button>
-      <button class="tab-btn" onclick="openTab(event,'tab4')">Agente de Organização Escolar – AOE</button>
-      <button class="tab-btn" onclick="openTab(event,'tab5')">PROATI</button>
+	  <button class="tab-btn" onclick="openTab(event,'tab2')">Vice-diretor Escolar</button>
+      <button class="tab-btn" onclick="openTab(event,'tab3')">Supervisor de Ensino</button>
+      <button class="tab-btn" onclick="openTab(event,'tab4')">Professor Especialista em Currículo – PEC</button>
+      <button class="tab-btn" onclick="openTab(event,'tab5')">Agente de Organização Escolar – AOE</button>
+      <button class="tab-btn" onclick="openTab(event,'tab6')">PROATI</button>
     </div>
 
     <!-- TAB 1 -->
@@ -278,8 +279,28 @@
       </table>
     </div>
 
-    <!-- TAB 2 -->
-    <div id="tab2" class="tab-content">
+<!-- TAB 2 -->
+    <div id="tab2" class="tab-content active">
+      <table id="vice-diretor" class="display">
+        <thead>
+          <tr><th>Descrição</th><th>Início Inscrição</th><th>Fim Inscrição</th><th>LINK</th><th>STATUS</th></tr>
+        </thead>
+        <tbody>
+        
+          <tr>
+          <td>Edital – Vice-diretor Escolar –  E.E. JARDIM SILVIA II</td>
+          <td>23/02/2026</td>
+          <td>24/02/2026</td>
+          <td><a class="download-link" href="https://decaieiras.educacao.sp.gov.br/edital-vice-diretor-escolar-e-e-jardim-silvia-ii/" target="_blank">Publicação</a></td>
+          <td>Em andamento</td>
+		  </tr>                                     
+          
+        </tbody>
+      </table>
+    </div>	  
+
+    <!-- TAB 3 -->
+    <div id="tab3" class="tab-content">
       <table id="supervisor" class="display">
         <thead>
           <tr><th>Descrição</th><th>Início Inscrição</th><th>Fim Inscrição</th><th>LINK</th><th>STATUS</th></tr>
@@ -314,8 +335,8 @@
       </table>
     </div>
 
-    <!-- TAB 3 -->
-    <div id="tab3" class="tab-content">
+    <!-- TAB 4 -->
+    <div id="tab4" class="tab-content">
       <table id="pec" class="display">
         <thead>
           <tr><th>Descrição</th><th>Início Inscrição</th><th>Fim Inscrição</th><th>LINK</th><th>STATUS</th></tr>
@@ -350,8 +371,8 @@
       </table>
     </div>
     
-    <!-- TAB 4 -->
-    <div id="tab4" class="tab-content">
+    <!-- TAB 5 -->
+    <div id="tab5" class="tab-content">
       <table id="aoe" class="display">
         <thead>
           <tr><th>Descrição</th><th>Início Inscrição</th><th>Fim Inscrição</th><th>LINK</th><th>STATUS</th></tr>
@@ -370,8 +391,8 @@
       </table>
     </div>
     
-    <!-- TAB 5 -->
-    <div id="tab5" class="tab-content">
+    <!-- TAB 6 -->
+    <div id="tab6" class="tab-content">
       <table id="proati" class="display">
         <thead>
           <tr><th>Descrição</th><th>Início Inscrição</th><th>Fim Inscrição</th><th>LINK</th><th>STATUS</th></tr>
@@ -442,7 +463,8 @@ function openTab(evt, tabId){
 
 $(document).ready(function(){
   $('#diretor').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
-    $('#supervisor').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+	$('#vice-diretor').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
+   	 $('#supervisor').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
 	  $('#pec').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
 	    $('#aoe').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
 		  $('#proati').DataTable({ order:[[0,'desc']], pageLength:10, language:{search:"Buscar:"} });
@@ -451,6 +473,7 @@ $(document).ready(function(){
 
 </body>
 </html>
+
 
 
 
