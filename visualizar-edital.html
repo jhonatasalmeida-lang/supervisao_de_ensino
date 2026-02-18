@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Visualização de Edital - URE Caieiras</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --text: #1f3a5f;
+  --primary: #2c6fb2;
+  --footer: #1f3a5f;
+}
+
+body.dark {
+  --bg: #0f172a;
+  --card: #111827;
+  --text: #e5e7eb;
+  --primary: #60a5fa;
+  --footer: #020617;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, var(--primary), #1e3a8a);
+  color: #fff;
+  padding: 25px 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.top-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.top-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+header p {
+  margin: 5px 0 0 0;
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+.btn {
+  background: #ffffff;
+  color: #1e3a8a;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.btn-dark {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+/* CONTEÚDO */
+main {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 15px;
+}
+
+.pdf-card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 15px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+iframe {
+  width: 100%;
+  height: 85vh;
+  border: none;
+  border-radius: 8px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--footer);
+  color: #cbd5f5;
+  padding: 25px 15px;
+  margin-top: 40px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+footer h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.copy {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="top-bar">
+    <div>
+      <h1>Equipe de Supervisão de Ensino - Editais</h1>
+      <p>Unidade Regional de Ensino de Caieiras</p>
+    </div>
+    <div class="top-actions">
+      <a class="btn" href="editais.html">⬅ Voltar</a>
+      <button class="btn btn-dark" onclick="toggleDarkMode()">🌙 Modo noturno</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="pdf-card">
+    <iframe id="pdfViewer"></iframe>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-container">
+    <div>
+      <h3>Unidade Regional de Ensino de Caieiras</h3>
+      <p>Equipe de Supervisão de Ensino</p>
+      <p>Secretaria da Educação do Estado de São Paulo</p>
+    </div>
+
+    <div>
+      <h3>Atalhos</h3>
+      <p><a href="https://decaieiras.educacao.sp.gov.br" style="color:#cbd5f5;">Site principal</a></p>
+      <p><a href="#" style="color:#cbd5f5;">Topo da página</a></p>
+    </div>
+
+    <div>
+      <h3>Visual</h3>
+      <p>Use o botão de modo noturno para melhor conforto visual.</p>
+    </div>
+
+    <div class="copy">
+      © 2026 - Unidade Regional de Ensino - Região de Caieiras. Todos os direitos reservados.
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleDarkMode(){
+  document.body.classList.toggle('dark');
+}
+
+/* Recebe o link do PDF via parâmetro ?pdf= */
+const params = new URLSearchParams(window.location.search);
+const pdfUrl = params.get("pdf");
+
+if(pdfUrl){
+  document.getElementById("pdfViewer").src = decodeURIComponent(pdfUrl);
+}else{
+  document.querySelector(".pdf-card").innerHTML =
+    "<p style='text-align:center;'>PDF não informado.</p>";
+}
+</script>
+
+</body>
+</html>
